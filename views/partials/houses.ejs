@@ -10,16 +10,64 @@
             <h2 class="street"><a href="/house/<%= house.id %>"><%= house.street %></a></h2>
             <button type="button" class="btn-remove"><img src="/assets/remove.svg" alt="remove-icon"></button>
         </div>
+
         <p><%= house.postal_code + house.city %></p>
         <p class="price">€ <%= house.price %> k.k.</p>
         <p><%= house.m2 + "m² / " + house.m2_garden + "m² / " + house.rooms + " kamers" %></p>
         <p class="agent"><%= house.agent !== null && house.agent !== "" ? house.agent : "geen makelaar" %></p>
-        <ul class="rating-list">
-            <li class="star active"></li>
-            <li class="star active"></li>
-            <li class="star active"></li>
-            <li class="star"></li>
-            <li class="star"></li>
-        </ul>
+
+        <article class="row">
+            <button type="button" class="btn-dropdown">+ Groep rating</button>
+            <%- include('./stars', {option: 0}) %>
+        </article>
+        
+        <article class="group-rating">
+            <h2>Score</h2>
+            <ul class="group-list">
+                <li>
+                    <button type="button" class="btn-dropdown row">
+                        <p>+ Mohammed</p>
+                        <%- include('./stars', {option: 0}) %>
+                    </button>
+                </li>
+            </ul>
+
+            <form method="POST" action="">
+            <input value="<%= house.id %>" name="houseId">
+            <input value="1" name="userId">
+            <ul>
+                <li class="row">
+                    <p>Algemeen</p>
+                    <%- include('./stars', {option: 1}) %>
+                </li>
+                <li class="row">
+                    <p>Keuken</p>
+                    <%- include('./stars', {option: 2}) %>
+                </li>
+                <li class="row">
+                    <p>Tuin</p>
+                    <%- include('./stars', {option: 3}) %>
+                </li>
+                <li class="row">
+                    <p>Ligging</p>
+                    <%- include('./stars', {option: 4}) %>
+                </li>
+                <li class="row">
+                    <p>Badkamer</p>
+                    <%- include('./stars', {option: 5}) %>
+                </li>
+                <li class="row">
+                    <p>Prijs</p>
+                    <%- include('./stars', {option: 6}) %>
+                </li>
+                <li class="row">
+                    <p>Oppervlakte</p>
+                    <%- include('./stars', {option: 7}) %>
+                </li>
+            </ul>
+            <button type="submit" class="btn-secondary">Opslaan</button>
+        </form>
+        </article>
+
     </section>
 </li>

@@ -67,6 +67,7 @@ h3 {
     text-decoration: none;
     padding: 1em;
     display: inline-block;
+    font-size: 1em;
 }
 
 .btn-secondary {
@@ -77,6 +78,16 @@ h3 {
     text-decoration: none;
     padding: 1em;
     display: inline-block;
+    font-size: 1em;
+}
+
+.btn-dropdown {
+    display: block;
+    color: var(--lochmara);
+    background: none;
+    outline: none;
+    border: none;
+    font-size: 1em;
 }
 
 .btn-primary:hover {
@@ -394,7 +405,6 @@ nav {
                     justify-content: left;
                     align-items: center;
                     list-style-type: none;
-                    margin-bottom: 1em;
 
                     & .star {
                         fill: var(--bahama-blue);
@@ -457,6 +467,19 @@ nav {
 
 .price {
     font-weight: bold;
+}
+
+.group-rating {
+    background-color: var(--regent-blue);
+    padding-top: 1em;
+
+    & .group-list {
+        & li {
+            & button {
+                padding: 0.5em 0;
+            }
+        }
+    }
 }
 /* ================================================ */
 /* house-grid */
@@ -525,6 +548,7 @@ nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
 
     & .col:first-child {

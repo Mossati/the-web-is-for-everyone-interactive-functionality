@@ -59,6 +59,25 @@ app.post('/', function (request, response) {
     response.redirect(303, '/')
 })
 
+const FavoriteRatings = []
+
+// Maak een POST route voor de favorite pagina
+app.post('/favorite/:id', function (request, response) {
+    const houseId = request.body.houseId;
+    const userId = request.body.userId
+    const houseRatings = []
+
+    for (let i = 1; i <= 7; i++) {
+        const rating = request.body[`rating${i}`];
+        houseRatings.push(rating)
+    }
+
+    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings})
+    console.log(FavoriteRatings)
+    
+    response.redirect(303, '/')
+})
+
 // Stel het poortnummer in waar express op moet gaan luisteren
 app.set('port', process.env.PORT || 8000)
 
