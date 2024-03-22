@@ -1,9 +1,9 @@
 // =========================================================================
 // navbar animation
 // =========================================================================
-btnNavRemove = document.querySelector('.btn-nav-remove');
-btnMenu = document.querySelector('.btn-menu');
-toggledNavMenu = document.querySelector('.toggled-navbar-list');
+let btnNavRemove = document.querySelector('.btn-nav-remove');
+let btnMenu = document.querySelector('.btn-menu');
+let toggledNavMenu = document.querySelector('.toggled-navbar-list');
 
 btnMenu.addEventListener("click", function(){
     toggledNavMenu.classList.remove('navbar-slide-up');
@@ -17,7 +17,7 @@ btnNavRemove.addEventListener("click", function(){
 // =========================================================================
 // format price
 // =========================================================================
-housePrice = document.querySelector('.price');
+let housePrice = document.querySelector('.price');
 
 function formatPrice(priceElement) {
     let priceText = priceElement.textContent.trim();
@@ -27,3 +27,24 @@ function formatPrice(priceElement) {
 }
 
 formatPrice(housePrice);
+// =========================================================================
+// user ratings
+// =========================================================================
+let btnUsers = document.querySelectorAll('.btn-user');
+let userRatings = document.querySelectorAll('.user-ratings');
+
+btnUsers.forEach(btnUser => {
+    btnUser.addEventListener("click", function(){
+        let userRating = btnUser.nextElementSibling;
+
+        if (userRating.classList.contains('user-ratings-display')) {
+            userRating.classList.remove('user-ratings-display');
+            userRating.classList.remove('user-rating-slide-down');
+            console.log("class verwijderd!");
+        }else {
+            userRating.classList.add('user-ratings-display');
+            userRating.classList.add('user-rating-slide-down');
+            console.log("class toegevoegd!");
+        }
+    });
+});

@@ -478,6 +478,14 @@ nav {
             & button {
                 padding: 0.5em 0;
             }
+
+            & .user-ratings {
+                display: none;
+            }
+
+            & .user-ratings-display {
+                display: block;
+            }
         }
     }
 }
@@ -595,6 +603,21 @@ nav {
     }
     100% {
         transform: translateY(0);
+    }
+}
+
+.user-rating-slide-down {
+    animation-name: ratingSlideDown;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes ratingSlideDown {
+    0% {
+        transform: scaleY(0);
+    }
+    100% {
+        transform: scaleY(1);
     }
 }
 /* ================================================ */

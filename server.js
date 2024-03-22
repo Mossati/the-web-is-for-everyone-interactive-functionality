@@ -9,6 +9,7 @@ const apiUrl = 'https://fdnd-agency.directus.app/items/'
 const houses = apiUrl + 'f_houses'
 const favoriteList = apiUrl + 'f_list'
 const housesImages = apiUrl + 'f_houses_files'
+const FavoriteRatings = []
 
 // Maak een nieuwe express app aan
 const app = express()
@@ -27,7 +28,7 @@ app.use(express.urlencoded({extended: true}))
 // GET route voor de index pagina
 app.get('/', function (request, response) {
     fetchJson(houses).then((housesData) => {
-      response.render('index', {houses: housesData.data})
+      response.render('index', {houses: housesData.data, ratings: FavoriteRatings})
     })
 })
 
@@ -35,14 +36,6 @@ app.get('/', function (request, response) {
 app.get('/favorites', function (request, response) {
   fetchJson(favoriteList).then((listsData) => {
     response.render('favorites', {lists: listsData.data})
-  })
-})
-
-// GET route voor de favorite pagina
-app.get('/favorite/:id', function (request, response) {
-  fetchJson(favoriteList + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
-    console.log(listData.data.houses)
-    response.render('favorite', {list: listData.data, houses: listData.data.houses})
   })
 })
 
@@ -59,7 +52,16 @@ app.post('/', function (request, response) {
     response.redirect(303, '/')
 })
 
-const FavoriteRatings = []
+
+// GET route voor de favorite pagina
+app.get('/favorite/:id', function (request, response) {
+  fetchJson(favoriteList + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
+    console.log(listData.data.houses)
+    console.log(FavoriteRatings)
+
+    response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+  })
+})
 
 // Maak een POST route voor de favorite pagina
 app.post('/favorite/:id', function (request, response) {
@@ -68,6 +70,7 @@ app.post('/favorite/:id', function (request, response) {
     const houseRatings = []
 
     for (let i = 1; i <= 7; i++) {
+        // const category = request.body[`category${i}`];
         const rating = request.body[`rating${i}`];
         houseRatings.push(rating)
     }

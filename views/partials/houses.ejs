@@ -25,48 +25,58 @@
             <h2>Score</h2>
             <ul class="group-list">
                 <li>
-                    <button type="button" class="btn-dropdown row">
+                    <button type="button" class="btn-dropdown row btn-user">
                         <p>+ Mohammed</p>
                         <%- include('./stars', {option: 0}) %>
                     </button>
+                    <form method="POST" action="" class="user-ratings">
+                    <input value="<%= house.id %>" name="houseId">
+                    <input value="1" name="userId">
+                    <% if (ratings) { %>
+                    <% ratings.forEach(rating => { %>
+                        <p>House ID: <%= rating.houseId %></p>
+                        <p>User ID: <%= rating.userId %></p>
+                        <ul>
+                            <% rating.rating.forEach(value => { %>
+                                <li>Rating: <%= value %></li>
+                            <% }) %>
+                        </ul>
+                    <% }) %>
+                    <% }else {} %>
+                    <ul>
+                        <li class="row">
+                            <input type="text" name="category1" value="Algemeen">
+                            <%- include('./stars', {option: 1}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category2" value="Keuken">
+                            <%- include('./stars', {option: 2}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category3" value="Tuin">
+                            <%- include('./stars', {option: 3}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category4" value="Ligging">
+                            <%- include('./stars', {option: 4}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category5" value="Badkamer">
+                            <%- include('./stars', {option: 5}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category6" value="Prijs">
+                            <%- include('./stars', {option: 6}) %>
+                        </li>
+                        <li class="row">
+                            <input type="text" name="category7" value="Oppervlakte">
+                            <%- include('./stars', {option: 7}) %>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn-secondary">Opslaan</button>
+                    </form>
                 </li>
             </ul>
-
-            <form method="POST" action="">
-            <input value="<%= house.id %>" name="houseId">
-            <input value="1" name="userId">
-            <ul>
-                <li class="row">
-                    <p>Algemeen</p>
-                    <%- include('./stars', {option: 1}) %>
-                </li>
-                <li class="row">
-                    <p>Keuken</p>
-                    <%- include('./stars', {option: 2}) %>
-                </li>
-                <li class="row">
-                    <p>Tuin</p>
-                    <%- include('./stars', {option: 3}) %>
-                </li>
-                <li class="row">
-                    <p>Ligging</p>
-                    <%- include('./stars', {option: 4}) %>
-                </li>
-                <li class="row">
-                    <p>Badkamer</p>
-                    <%- include('./stars', {option: 5}) %>
-                </li>
-                <li class="row">
-                    <p>Prijs</p>
-                    <%- include('./stars', {option: 6}) %>
-                </li>
-                <li class="row">
-                    <p>Oppervlakte</p>
-                    <%- include('./stars', {option: 7}) %>
-                </li>
-            </ul>
-            <button type="submit" class="btn-secondary">Opslaan</button>
-        </form>
         </article>
 
     </section>
