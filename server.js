@@ -65,7 +65,7 @@ app.get('/favorite/:id', function (request, response) {
 
 // Maak een POST route voor de favorite pagina
 app.post('/favorite/:id', function (request, response) {
-    const houseId = request.body.houseId;
+    const houseId = request.body.houseId
     const userId = request.body.userId
     const houseRatings = []
 

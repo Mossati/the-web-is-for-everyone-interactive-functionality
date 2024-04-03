@@ -6,54 +6,118 @@
 
 <!-- main -->
 <main>
-    <section class="main-padding">
-    <h1>Favorieten lijst</h1>
-    <h2 class="favorite-title"><%= list.title %></h2>
-    <p class="favorite-description"><%= list.description %></p>
+    <!-- list section -->
+    <section class="list-section">
+        <h1><%= list.title %></h1>
+        <p><%= list.description %></p>
+    </section>
+
+    <!-- member section -->
     <section class="member-section">
-        <h3>Groeps leden</h3>
+        <h2>Groepsleden</h2>
+        <hr>
         <ul class="member-list">
-            <li>
-                <div class="profile-container">
-                    <img src="/assets/Mohammed.png" alt="profile-img">
-                </div>
+            <li class="member-item">
+                <article class="member-add"><img src="/assets/icon-add-big.svg" alt="icon-add"></article>
+                <p>Voeg toe</p>
+            </li>
+            <% for(let i = 0; i <= 5; i++) { %>
+            <li class="member-item">
+                <article class="member-profile">
+                    <img src="/assets/Mohammed.png" alt="icon-profile">
+                </article>
                 <p>Mohammed</p>
             </li>
-            <li><img src="/assets/plus.svg" alt="plus-icon"></li>
+            <% } %>
         </ul>
     </section>
 
-    <div class="search-bar">
-        <input type="search" placeholder="zoek naar huis in lijst...">
-        <button type="button" class="btn-primary">Zoek</button>
-    </div>
+    <section class="search-section">
+        <ul class="search-list">
+            <li class="search-item">
+                <input type="search" placeholder="Zoek op plaats, buurt of postcode">
+            </li>
+            <li class="search-item">
+                <button type="button" class="btn-map">
+                    <img src="/assets/icon-map.svg" alt="icon-map">
+                </button>
+            </li>
+        </ul>
+        <hr>
+    </section>
 
-    <div class="sort-add-section">
-        <select aria-label="sort">
-            <option disabled selected>Sorteren</option>
-            <option>Bewaardatum</option>
-            <option>Bewaardatum</option>
-            <option>Objectscore</option>
-            <option>Datum</option>
-            <option>Plaats</option>
-            <option>Postcode</option>
-            <option>Adres</option>
-            <option>Vraagprijs</option>
-            <option>Huurprijs</option>
-            <option>Gebruiksopp.</option>
-            <option>Perceelopp.</option>
-            <option>Kamers</option>
-        </select>
-        <button class="btn-secondary" type="button"><i class="fa-solid fa-plus"></i> Voeg huis toe</button>
-    </div>
+    <!-- option section -->
+    <section class="option-section">
+        <ul class="option-list">
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-filter.svg" alt="icon-filter">
+                    <p>Filters</p>
+                </button>
+            </li>
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-sort.svg" alt="icon-sort">
+                    <p>Sorteren</p>
+                </button>
+            </li>
+            <li class="option-item">
+                <button type="button" class="btn-option">
+                    <img src="/assets/icon-add.svg" alt="icon-add">
+                    <p>Voeg toe</p>
+                </button>
+            </li>
+        </ul>
+    </section>
 
-    <div class="house-section">
+    <!-- house section -->
+    <section class="house-section">
         <ul class="house-list">
             <% houses.forEach(house => { %>
-                <%- include('./partials/houses', {house: house.f_houses_id}) %>
+            <li class="house-item">
+                <article class="house-image">
+                    <img src="https://fdnd-agency.directus.app/assets/<%= house.f_houses_id.poster_image %>" alt="house-img">
+                </article>
+                <ul class="house-details">
+                    <li class="house-title">
+                        <h2><%= house.f_houses_id.street %></h2>
+                        <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove"></button>
+                    </li>
+                    <li><%= house.f_houses_id.postal_code + house.f_houses_id.city %></li>
+                    <li class="house-price">€ <%= house.f_houses_id.price %> k.k.</li>
+                    <li><%= house.f_houses_id.m2 + "m² / " + house.f_houses_id.m2_garden + "m² / " + house.f_houses_id.rooms + " kamers" %></li>
+                    <li class="house-agent"><%= house.f_houses_id.agent !== null && house.f_houses_id.agent !== "" ? house.f_houses_id.agent : "geen makelaar" %></li>
+                </ul>
+                <ul class="house-rating-list">
+                    <li class="rating-item">+ Groepsrating</li>
+                    <li class="rating-item">
+                        <ul class="star-list">
+                            <li class="star-item">
+                                <label for="star1"><img src="/assets/icon-star.svg" alt="icon-star"></label>
+                                <input type="radio" name="star" id="star1" value="1">
+                            </li>
+                            <li class="star-item">
+                                <label for="star2"><img src="/assets/icon-star.svg" alt="icon-star"></label>
+                                <input type="radio" name="star" id="star2" value="2">
+                            </li>
+                            <li class="star-item">
+                                <label for="star3"><img src="/assets/icon-star.svg" alt="icon-star"></label>
+                                <input type="radio" name="star" id="star3" value="3">
+                            </li>
+                            <li class="star-item">
+                                <label for="star4"><img src="/assets/icon-star.svg" alt="icon-star"></label>
+                                <input type="radio" name="star" id="star4" value="4">
+                            </li>
+                            <li class="star-item">
+                                <label for="star5"><img src="/assets/icon-star.svg" alt="icon-star"></label>
+                                <input type="radio" name="star" id="star5" value="5">
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
             <%  }) %>
         </ul>
-    </div>
     </section>
 </main>
 
