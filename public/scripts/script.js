@@ -1,50 +1,27 @@
 // =========================================================================
-// navbar animation
+// rating system
 // =========================================================================
-let btnNavRemove = document.querySelector('.btn-nav-remove');
-let btnMenu = document.querySelector('.btn-menu');
-let toggledNavMenu = document.querySelector('.toggled-navbar-list');
+let btnGroupRatings = document.querySelectorAll('.btn-group-rating');
+let groupRatingArticles = document.querySelectorAll('.group-rating-article');
+let btnUserRatings = document.querySelectorAll('.btn-user-rating');
+let userRatingForms = document.querySelectorAll('.user-rating-form');
 
-btnMenu.addEventListener("click", function(){
-    toggledNavMenu.classList.remove('navbar-slide-up');
-    toggledNavMenu.classList.toggle('navbar-slide-down');
+btnGroupRatings.forEach((btnGroupRating, index) => {
+    btnGroupRating.addEventListener("click", function() {
+        let groupRatingArticle = groupRatingArticles[index];
+
+        if (groupRatingArticle) {
+            groupRatingArticle.classList.toggle('hidden');
+        }
+    });
 });
 
-btnNavRemove.addEventListener("click", function(){
-    toggledNavMenu.classList.remove('navbar-slide-down');
-    toggledNavMenu.classList.toggle('navbar-slide-up');
-})
-// =========================================================================
-// format price
-// =========================================================================
-let housePrice = document.querySelector('.price');
+btnUserRatings.forEach((btnUserRating, index) => {
+    btnUserRating.addEventListener("click", function() {
+        let userRatingForm = userRatingForms[index];
 
-function formatPrice(priceElement) {
-    let priceText = priceElement.textContent.trim();
-    let priceValue = parseFloat(priceText.replace(/[^\d.,]/g, '').replace(',', '.')); // Filter non-numeric characters and convert comma to dot
-    let formattedPrice = priceValue.toLocaleString('nl-NL', { style: 'currency', currency: 'EUR' });
-    priceElement.textContent = formattedPrice;
-}
-
-formatPrice(housePrice);
-// =========================================================================
-// user ratings
-// =========================================================================
-let btnUsers = document.querySelectorAll('.btn-user');
-let userRatings = document.querySelectorAll('.user-ratings');
-
-btnUsers.forEach(btnUser => {
-    btnUser.addEventListener("click", function(){
-        let userRating = btnUser.nextElementSibling;
-
-        if (userRating.classList.contains('user-ratings-display')) {
-            userRating.classList.remove('user-ratings-display');
-            userRating.classList.remove('user-rating-slide-down');
-            console.log("class verwijderd!");
-        }else {
-            userRating.classList.add('user-ratings-display');
-            userRating.classList.add('user-rating-slide-down');
-            console.log("class toegevoegd!");
+        if (userRatingForm) {
+            userRatingForm.classList.toggle('hidden');
         }
     });
 });

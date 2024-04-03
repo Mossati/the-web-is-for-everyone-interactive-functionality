@@ -80,7 +80,7 @@
                 </article>
                 <ul class="house-details">
                     <li class="house-title">
-                        <h2><%= house.f_houses_id.street %></h2>
+                        <h2><a href="/house/<%= house.f_houses_id.id %>"><%= house.f_houses_id.street + house.f_houses_id.house_nr + house.f_houses_id.nr_addition %></a></h2>
                         <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove"></button>
                     </li>
                     <li><%= house.f_houses_id.postal_code + house.f_houses_id.city %></li>
@@ -89,32 +89,73 @@
                     <li class="house-agent"><%= house.f_houses_id.agent !== null && house.f_houses_id.agent !== "" ? house.f_houses_id.agent : "geen makelaar" %></li>
                 </ul>
                 <ul class="house-rating-list">
-                    <li class="rating-item">+ Groepsrating</li>
                     <li class="rating-item">
-                        <ul class="star-list">
-                            <li class="star-item">
-                                <label for="star1"><img src="/assets/icon-star.svg" alt="icon-star"></label>
-                                <input type="radio" name="star" id="star1" value="1">
-                            </li>
-                            <li class="star-item">
-                                <label for="star2"><img src="/assets/icon-star.svg" alt="icon-star"></label>
-                                <input type="radio" name="star" id="star2" value="2">
-                            </li>
-                            <li class="star-item">
-                                <label for="star3"><img src="/assets/icon-star.svg" alt="icon-star"></label>
-                                <input type="radio" name="star" id="star3" value="3">
-                            </li>
-                            <li class="star-item">
-                                <label for="star4"><img src="/assets/icon-star.svg" alt="icon-star"></label>
-                                <input type="radio" name="star" id="star4" value="4">
-                            </li>
-                            <li class="star-item">
-                                <label for="star5"><img src="/assets/icon-star.svg" alt="icon-star"></label>
-                                <input type="radio" name="star" id="star5" value="5">
-                            </li>
-                        </ul>
+                        <button type="button" class="btn-type-2 btn-group-rating">+ Groepsrating</button>
+                    </li>
+                    <li class="rating-item">
+                        <%- include('./partials/star-rating') %>
                     </li>
                 </ul>
+                <article class="group-rating-article hidden">
+                    <h3>Score</h3>
+                    <ul class="group-rating-list">
+                        <li class="group-rating-item">
+                            <ul class="user-list">
+                                <li class="user-item">
+                                    <button type="button" class="btn-type-2 btn-user-rating">+ Mohammed</button>
+                                </li>
+                                <li class="user-item"><%- include('./partials/star-rating') %></li>
+                            </ul>
+
+                            <form class="user-rating-form hidden">
+                                <ul class="user-rating-list">
+                                    <li class="user-rating-item">
+                                        <p>Algemeen</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Keuken</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Badkamer</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Tuin</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Prijs</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Ligging</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                    <li class="user-rating-item">
+                                        <p>Oppervlakte</p>
+                                        <%- include('./partials/star-rating') %>
+                                    </li>
+                                </ul>
+
+                                <h3>Notities</h3>
+                                <textarea></textarea>
+                                <ul class="rating-button-list">
+                                    <li class="rating-button-item">
+                                        <button type="submit" class="btn-type-1">Opslaan</button>
+                                    </li>
+                                    <li class="rating-button-item">
+                                        <button type="button" class="btn-type-2">
+                                            <img src="/assets/icon-remove.svg" alt="icon-trash">
+                                            Verwijderen
+                                        </button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </li>
+                    </ul>
+                </article>
             </li>
             <%  }) %>
         </ul>
