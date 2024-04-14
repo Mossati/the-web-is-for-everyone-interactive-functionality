@@ -84,7 +84,7 @@
                         <button type="button" class="btn-remove"><img src="/assets/icon-remove.svg" alt="icon-remove"></button>
                     </li>
                     <li><%= house.f_houses_id.postal_code + house.f_houses_id.city %></li>
-                    <li class="house-price">€ <%= house.f_houses_id.price %> k.k.</li>
+                    <li class="house-price"><%= new Intl.NumberFormat('en-DE', { style: 'currency', currency: 'EUR' }).format(house.f_houses_id.price) %> k.k.</li>
                     <li><%= house.f_houses_id.m2 + "m² / " + house.f_houses_id.m2_garden + "m² / " + house.f_houses_id.rooms + " kamers" %></li>
                     <li class="house-agent"><%= house.f_houses_id.agent !== null && house.f_houses_id.agent !== "" ? house.f_houses_id.agent : "geen makelaar" %></li>
                 </ul>
@@ -93,7 +93,7 @@
                         <button type="button" class="btn-type-2 btn-group-rating">+ Groepsrating</button>
                     </li>
                     <li class="rating-item">
-                        <%- include('./partials/star-rating') %>
+                        <%- include('./partials/star-rating', {input: false, category: "none"}) %>
                     </li>
                 </ul>
                 <article class="group-rating-article hidden">
@@ -104,43 +104,45 @@
                                 <li class="user-item">
                                     <button type="button" class="btn-type-2 btn-user-rating">+ Mohammed</button>
                                 </li>
-                                <li class="user-item"><%- include('./partials/star-rating') %></li>
+                                <li class="user-item"><%- include('./partials/star-rating', {input: false, category: "none"}) %></li>
                             </ul>
 
                             <form method="POST" action="" class="user-rating-form hidden">
+                                <input type="hidden" value="<%= house.f_houses_id.id %>" name="houseId">
+                                <input type="hidden" value="65" name="userId">
                                 <ul class="user-rating-list">
                                     <li class="user-rating-item">
                                         <p>Algemeen</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "algemeen"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Keuken</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "keuken"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Badkamer</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "badkamer"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Tuin</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "tuin"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Prijs</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "prijs"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Ligging</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "ligging"}) %>
                                     </li>
                                     <li class="user-rating-item">
                                         <p>Oppervlakte</p>
-                                        <%- include('./partials/star-rating') %>
+                                        <%- include('./partials/star-rating', {input: true, category: "oppervlakte"}) %>
                                     </li>
                                 </ul>
 
                                 <h3>Notities</h3>
-                                <textarea></textarea>
+                                <textarea name="notes"></textarea>
                                 <ul class="rating-button-list">
                                     <li class="rating-button-item">
                                         <button type="submit" class="btn-type-1">Opslaan</button>

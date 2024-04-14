@@ -1,5 +1,5 @@
 // =========================================================================
-// rating system
+// rating menu
 // =========================================================================
 let btnGroupRatings = document.querySelectorAll('.btn-group-rating');
 let groupRatingArticles = document.querySelectorAll('.group-rating-article');
@@ -25,3 +25,6 @@ btnUserRatings.forEach((btnUserRating, index) => {
         }
     });
 });
+// =========================================================================
+// rating stars
+// =========================================================================

@@ -44,25 +44,34 @@ body {
     align-items: center;
     list-style-type: none;
 
-    & .star-item {
-        margin-right: 1em;
-
-        & input[type="radio"] {
-            display: none;
-        }
+    & .star-item input {
+        /* display: none; */
     }
 
-    & .star-item label img {
+    & .star-item label {
+        width: 1.5em;
+        height: 1.5em;
         cursor: pointer;
+        transition: 0.5s ease;
+        margin-right: 1em;
     }
 
-    & .star-item input[type="radio"]:checked ~ label img,
-    .star-item input[type="radio"]:hover ~ label img {
+    & .star-item label::before {
+        content: url('/assets/icon-star.svg');
+    }
+
+    & .star-item input:checked ~ label {
         content: url('/assets/icon-star-filled.svg');
     }
 
-    & .star-item:last-child {
-        margin-right: 0;
+    & .star-item:not(:checked) > label:hover,
+    .star-item:not(:checked) > label:hover ~ label {
+        content: url('/assets/icon-star-filled.svg');
+    }
+
+    & .star-item input:checked > label:hover,
+    .star-item input:checked > label:hover ~ label {
+        content: url('/assets/icon-star-filled.svg');
     }
 }
 /* ================================================ */

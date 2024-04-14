@@ -55,12 +55,12 @@ app.post('/', function (request, response) {
 
 // GET route voor de favorite pagina
 app.get('/favorite/:id', function (request, response) {
-  fetchJson(favoriteList + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
-    console.log(listData.data.houses)
-    console.log(FavoriteRatings)
+    fetchJson(favoriteList + "/" + request.params.id + '?fields=*.*.*').then((listData) => {
+        //console.log(listData.data.houses)
+        //console.log(FavoriteRatings)
 
-    response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
-  })
+        response.render('favorite', {list: listData.data, houses: listData.data.houses, ratings: FavoriteRatings})
+    })
 })
 
 // Maak een POST route voor de favorite pagina
@@ -68,14 +68,16 @@ app.post('/favorite/:id', function (request, response) {
     const houseId = request.body.houseId
     const userId = request.body.userId
     const houseRatings = []
+    const notes = request.body.notes
 
-    for (let i = 1; i <= 7; i++) {
-        // const category = request.body[`category${i}`];
-        const rating = request.body[`rating${i}`];
-        houseRatings.push(rating)
-    }
+    const categories = ['algemeen', 'keuken', 'badkamer', 'tuin', 'prijs', 'ligging', 'oppervlakte'];
 
-    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings})
+    categories.forEach(category => {
+        const rating = request.body[category];
+        houseRatings[category] = rating;
+    });
+
+    FavoriteRatings.push({ houseId: houseId, userId: userId, rating: houseRatings, notes: notes})
     console.log(FavoriteRatings)
     
     response.redirect(303, '/')
